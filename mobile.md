@@ -29,6 +29,3 @@
 	- Project must compile in Android Studio and Gradle
 	- Use the latest version of `Java` or `Kotlin`
 
-## Wireframe
-*For reference only, you can design your own UI*
-![Wireframe](assets/mobile-engineer-wireframe.png)
