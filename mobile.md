@@ -18,8 +18,9 @@
 
 ## Technical Requirement
 - Source code must be stored in a git repository (github or bitbucket)
-- App should cache API result (Cached poeple should be available offline)
+- App should cache API result (Cached the people and should be available offline)
 - Candidates are free to use any libraries
+- Expect the code is **production ready**
 
 * ### iOS Engineer
 	- Storyboard or XIB is not allowed (Create UI with code only)
