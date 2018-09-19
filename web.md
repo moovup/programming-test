@@ -1,4 +1,4 @@
-# Mobile Developer Programming Test
+# Programming Test
 
 
 ## Question 1
