@@ -20,6 +20,8 @@
 - Source code must be stored in a git repository (github or bitbucket)
 - App should cache the API result and should be available offline
 - Candidates are free to use any libraries
+- Test cases are required
+- Setup instruction is required
 - Expect the code is **production ready**
 
 * ### iOS Engineer
