@@ -15,7 +15,6 @@
 - Show details when user select an item in the list.
 - Add marker on the map based on the provided latitude/longitude in `location`. 
 - Display the person name on the marker when it is tapped.
-- There should be an option to manually add, edit and delete the pins via gestures.
 
 
 ## Technical Requirement
