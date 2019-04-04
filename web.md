@@ -18,7 +18,7 @@ Use the following undirected graph ­- nodes can be visited only once:
   * Method
     `GET`
   * Endpoint
-    `http://www.json-generator.com/api/json/get/cfdlYqzrfS`
+    `https://next.json-generator.com/api/json/get/41P1_UhSI`
 
 ### User Requirements
 - Retrieve list of people from the API
