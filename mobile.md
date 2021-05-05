@@ -33,6 +33,9 @@
 	- Project must compile in Android Studio and Gradle
 	- Use the latest version of `Java` or `Kotlin`
 
+* ### Flutter Engineer
+	- Use the latest version of `Dart` and `Flutter`
+
 
 ## Wireframe
 *For your reference only, you can have your own design and UX*
