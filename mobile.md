@@ -37,7 +37,7 @@ Use the following undirected graph ­- nodes can be visited only once:
 
 
 ## Technical Requirement
-- Source code must be stored in a git repository (github or bitbucket)
+- Source code must be stored in a git repository (github / gitlab / bitbucket)
 - App should cache the API result and should be available offline
 - You are free to use any libraries
 - Test cases are required
