@@ -19,7 +19,7 @@ Use the following undirected graph ­- nodes can be visited only once:
     `GET`
   * Endpoint
     `https://api.json-generator.com/templates/-xdNcNKYtTFG/data`
-  * API Key: `vza4lbzrzy3cyhg4nbzyjhmqzjlqr2p3qibd9986` (Don't worry. It is a public key. If it doesn't work, do let us know)
+  * API Key: `b2atclr0nk1po45amg305meheqf4xrjt9a1bo410` (Don't worry. It is a public key. If it doesn't work, do let us know)
 
 ### Example: Fetch From API by command line
 ```
