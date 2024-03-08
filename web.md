@@ -37,6 +37,7 @@ Use the following undirected graph ­- nodes can be visited only once:
 - Source code must be stored in a git repository (github /gitlab / bitbucket)
 - Must be a single-page application (SPA)
 - Candidates are free to use any libraries
+- Test cases are required
 - Expect the code is **production ready**
 
 
