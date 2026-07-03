@@ -2,34 +2,15 @@
 
 ## Goal
 
-Build a leaky bucket rate limiter with a minimal REST API on top.
-
-The main focus is:
-
-- Correct leaky bucket logic
-- Clean code and clear separation between core logic and the REST API layer
-- Unit tests for core functionality
-
-Keep the scope minimal. Do not over-engineer the solution.
-
----
-
-## Problem Description
-
-You are tasked with implementing a rate limiter using a **leaky bucket algorithm** where:
-
-- There is one **global rate limiter instance** for the application
-- Each user has their own independent bucket inside that limiter
+Build a small REST API that uses a **single global in-memory leaky bucket rate limiter**.
+- Each user has their own bucket with a fixed capacity
 - Requests fill the bucket (add 1 unit)
 - The bucket "leaks" at a constant rate over time
 - If a request would overflow the bucket, it should be rejected
-- Bucket level should never go below `0`
 
 ---
 
 ## Required Core Interface
-
-Implement these functions, or equivalent methods in your chosen language:
 
 ```pseudocode
 function create_rate_limiter(capacity, leak_rate):
@@ -46,17 +27,6 @@ function get_bucket_state(limiter, user_id):
     // Returns: bucket_info or null if user doesn't exist
 ```
 
-Example bucket state:
-
-```json
-{
-  "level": 1.0,
-  "capacity": 5,
-  "leak_rate": 1.0,
-  "last_updated_at": 1710000000.0
-}
-```
-
 ---
 
 ## Core Requirements
@@ -67,72 +37,50 @@ Example bucket state:
 
 ---
 
-## Global Rate Limiter
+## Rate Limiter Initialization
 
-The application should create **one global limiter** when the server starts:
+The application should create one global limiter when the server starts.
 
-```pseudocode
-// Application startup
-limiter = create_rate_limiter(capacity=5, leak_rate=1.0)
+```text
+create_rate_limiter(capacity, leak_rate)
 ```
 
-You may configure `capacity` and `leak_rate` using environment variables, a config file, or documented default values. Default values are acceptable:
+Example startup behavior:
+
+```text
+// Application startup
+
+limiter = create_rate_limiter(capacity = 5, leak_rate = 1.0)
+```
+
+The REST API does **not** need an endpoint to create limiters.
+
+You may configure `capacity` and `leak_rate` using environment variables, a config file, or documented default values.
+
+Default values are acceptable:
 
 ```text
 capacity = 5
 leak_rate = 1.0
 ```
 
-The REST API does **not** need an endpoint to create limiters.
-
 ---
 
 ## REST API Requirements
 
-Use any programming language and REST framework.
+The REST API should call the core functions instead of implementing the algorithm inside the handler.
 
-You decide the route naming, HTTP verbs, and exact response shapes. The API should expose two behaviors:
+The API should expose two behaviors:
 
 ### 1. Check whether a request is allowed
 
-Accept a `user_id` and `timestamp`, call `allow_request`, and update the global limiter state with the returned state.
+Call `allow_request`, and update the global limiter state with the returned state.
 
-When the request is **allowed**, respond with a success status and include enough information for the caller to understand the outcome (e.g. that the request was allowed and the user's current bucket state).
-
-When the request is **rejected** because the bucket would overflow, respond with an appropriate rate-limit status (e.g. `429 Too Many Requests`) and include the user's bucket state so the caller can see why it was rejected.
-
-Invalid input (e.g. missing or malformed fields) should return a client error (e.g. `400 Bad Request`).
-
-The REST handler should call the core functions instead of reimplementing the algorithm inline.
-
-Example flow:
-
-```pseudocode
-// Application startup
-limiter = create_rate_limiter(5, 1.0)
-
-// Incoming HTTP request
-handle request:
-    user_id = request.body.user_id
-    timestamp = request.body.timestamp
-
-    [allowed, updated_limiter] = allow_request(limiter, user_id, timestamp)
-    limiter = updated_limiter
-    bucket = get_bucket_state(limiter, user_id)
-
-    if allowed:
-        return success response with bucket state
-    else:
-        return rate-limit response with bucket state
-```
 
 ### 2. Get bucket state for a user
 
-Accept a `user_id`, call `get_bucket_state`, and return the bucket information.
+Call `get_bucket_state`, and return the bucket information.
 
-When the user exists, respond with success and the bucket state.
-
-When the user has no bucket yet, respond with an appropriate not-found status (e.g. `404 Not Found`).
 
 ---
 
@@ -151,8 +99,6 @@ Expose the two behaviors described above using your chosen framework and convent
 Handle these scenarios in the core logic:
 
 - First request from a new user
-- Timestamps that go backwards
-- Very large time gaps between requests
 - Bucket overflow scenarios
 
 ---
